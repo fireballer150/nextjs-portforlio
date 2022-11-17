@@ -59,7 +59,7 @@ export async function getServerSideProps() {
   );
 
   const projects = await res.json();
-  //   console.log("$$$$$", projects);
+  // console.log("$$$$$", projects.Name.title[0]);
   const projectNames = projects.results.map(
     (aProject) => aProject.properties.Name.title[0].plain_text
   );
