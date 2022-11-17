@@ -29,12 +29,16 @@ export default function Projects({ projects }) {
   );
 }
 
+// 빌드 타임에 호출
+// export async function getStaticProps() {
+
+// 각 요청 때마다 호출
 export async function getServerSideProps() {
   const options = {
     method: "POST",
     headers: {
       Accept: "application/json",
-      "Notion-Version": "2022-02-28",
+      "Notion-Version": "2022-02-22",
       "Content-Type": "application/json",
       Authorization: `Bearer ${TOKEN}`,
     },
@@ -55,15 +59,15 @@ export async function getServerSideProps() {
   );
 
   const projects = await res.json();
-
+  //   console.log("$$$$$", projects);
   const projectNames = projects.results.map(
-    (aProject) => aProject.properties.Name.title[0]?.plain_text
+    (aProject) => aProject.properties.Name.title[0].plain_text
   );
 
   console.log(`projectNames : ${projectNames}`);
 
   return {
     props: { projects },
-    revalidate: 1,
+    // revalidate: 1,
   };
 }
